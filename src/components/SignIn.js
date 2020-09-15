@@ -2,7 +2,7 @@ import React from 'react';
 import FormInput from './FormInput';
 import CustomButton from './CustomButton.js';
 import './styles/sign-in.styles.scss';
-import { signInWithGoogle } from '../firebase/firebase.util';
+import { auth, signInWithGoogle } from '../firebase/firebase.util';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -14,15 +14,22 @@ class SignIn extends React.Component {
     };
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    this.setState({ email: '', password: '' });
+
+    const { email, password } = this.state;
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState({ email: '', password: '' });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   handleChange = (event) => {
     const { value, name } = event.target;
 
-    this.setState({ [name]: value });
+    this.setState({ [name]: value }); //In Javascript, when you create an object literal {} and you wrap the object’s key in array brackets [key] you can dynamically set that key.
   };
 
   render() {
