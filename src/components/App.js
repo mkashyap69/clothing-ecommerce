@@ -6,7 +6,10 @@ import SignInAndSignUpPage from './SignInAndSignUpPage';
 import Header from './Header';
 import CheckoutPage from './CheckoutPage';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { auth, createUserProfileDoc } from '../firebase/firebase.util';
+import {
+  auth,
+  createUserProfileDoc,
+} from '../firebase/firebase.util';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../redux/action/user-action';
 import { selectCurrentUser } from '../redux/selectors/user';
@@ -30,6 +33,11 @@ class App extends React.Component {
       }
       setCurrentUser(userAuth);
     });
+
+    /*  addCollectionAndDocuments(
+      'collection',
+      collectionArray.map(({ title, items }) => ({ title, items }))
+    ); */
   }
 
   componentWillUnmount() {
@@ -40,7 +48,7 @@ class App extends React.Component {
       <div>
         <Header />
         <Switch>
-          <Route exact={true} path="/" component={HomePage} />
+          <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
           <Route exact path="/checkout" component={CheckoutPage} />
           <Route
