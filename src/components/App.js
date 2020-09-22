@@ -6,10 +6,7 @@ import SignInAndSignUpPage from './SignInAndSignUpPage';
 import Header from './Header';
 import CheckoutPage from './CheckoutPage';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import {
-  auth,
-  createUserProfileDoc,
-} from '../firebase/firebase.util';
+import { auth, createUserProfileDoc } from '../firebase/firebase.util';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../redux/action/user-action';
 import { selectCurrentUser } from '../redux/selectors/user';
@@ -20,6 +17,15 @@ class App extends React.Component {
 
   componentDidMount() {
     const { setCurrentUser } = this.props;
+//using fetch for one time calls
+    /* fetch(
+      'https://firestore.googleapis.com/v1/projects/clothing-ecommerce-9d48b/databases/(default)/documents/collection}'
+    )
+      .then((response) => response.json())
+      .then((collections) => console.log(collections)); */
+
+    //observer and observable pattern, subscribing to a series of events called observable using observer
+    //this pattern gives regular updates whenever something changes, in promise pattern call is made only once, there is no subscription
     this.unSubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDoc(userAuth);
