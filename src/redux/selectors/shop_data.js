@@ -24,3 +24,8 @@ export const selectCollectionIsFetching = createSelector(
   [selectShopData],
   (shop_data) => shop_data.isFetching
 );
+
+export const selectCollectionIsLoaded = createSelector(
+  [selectShopData],
+  (shop_data) => !!shop_data.collections //if collection is null it will show false
+);
