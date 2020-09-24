@@ -1,0 +1,58 @@
+redux saga are used to call asynchronous calls and impure functions
+
+sagas are called after the reducers and then the actions in sagas are called, it acts as an middleware
+
+impure functions are the functions which outputs are not same, and it depends on some value outside of the function scope
+
+redux saga is based on generator function, 
+
+generator functions are functions in which we can play pause execution using calling next on function
+
+function* gen(i){
+    yield i;
+    yield i+15;
+    return 25;
+}
+
+const gobj=gen(5).next();
+
+gobj={value=5,done=false} //console.log values
+
+const jobj=gobj.next();
+
+jobj={value=15,done=false} //console.log values
+
+
+const kobj=jobj.next();
+
+kobj={value=25,done=true} //console.log values 
+
+
+async await is based on generator functions
+
+
+take is used when we are done with the generator functions and it will not call the saga again and again
+
+
+export function* takeSaga(){
+    yield take(action);
+      console.log('I am done)
+}
+
+
+
+take every is used when function done is false and we need to call the saga again and again
+
+export function* gen(i){
+    yield i
+}
+
+export function* takeSaga(){
+    yield takeEvery(action,gen(5)) //take every creates new saga every time it's called, but in case of take it will block the code when delay is used
+    //while take will only run the generator untill the done value is false
+}
+
+yield delay(5000) will block the code until 5s is not completed
+
+
+take latest will onl fire the latest yield

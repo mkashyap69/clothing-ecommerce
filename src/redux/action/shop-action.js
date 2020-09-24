@@ -1,15 +1,15 @@
 import { firestore, convertSnapshotToMap } from '../../firebase/firebase.util';
 
-const fetchCollectionsStart = () => ({
+export const fetchCollectionsStart = () => ({
   type: 'FETCH_COLLECTIONS_START',
 });
 
-const fetchCollectionsSuccess = (collectionMap) => ({
+export const fetchCollectionsSuccess = (collectionMap) => ({
   type: 'FETCH_COLLECTIONS_SUCCESS',
   payload: collectionMap,
 });
 
-const fetchCollectionsFailure = (errorMessage) => ({
+export const fetchCollectionsFailure = (errorMessage) => ({
   type: 'FETCH_COLLECTIONS_FAILURE',
   payload: errorMessage,
 });
