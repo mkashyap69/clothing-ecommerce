@@ -17,7 +17,7 @@ const StripeCheckoutButton = ({ price }) => {
       },
     })
       .then((response) => {
-        alert('Successful Payment');
+        alert('succesful payment');
       })
       .catch((error) => {
         console.log('Payment Error: ', error);
@@ -30,11 +30,11 @@ const StripeCheckoutButton = ({ price }) => {
   return (
     <StripeCheckout
       label="Pay Now"
-      name="CROWN Clothing Ltd."
+      name="CRWN Clothing Ltd."
       billingAddress
       shippingAddress
       image="https://svgshare.com/i/CUz.svg"
-      description={`Your total price is $${price}`}
+      description={`Your total is $${price}`}
       amount={priceForStripe}
       panelLabel="Pay Now"
       token={onToken}
