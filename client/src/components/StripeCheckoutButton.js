@@ -9,7 +9,7 @@ const StripeCheckoutButton = ({ price }) => {
 
   const onToken = (token) => {
     axios({
-      url: 'payment',
+      url: 'http://localhost:5000/payment',
       method: 'post',
       data: {
         amount: priceForStripe,
