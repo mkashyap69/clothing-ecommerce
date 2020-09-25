@@ -32,12 +32,12 @@ app.post('/payment', (req, res) => {
   const body = {
     source: req.body.token.id,
     amount: req.body.amount,
-    currency: 'usd',
+    currency: 'inr',
   };
 
   stripe.charges.create(body, (stripeErr, stripeRes) => {
     if (stripeErr) {
-        console.log(stripeErr)
+      console.log(stripeErr);
       res.status(500).send({ error: stripeErr });
     } else {
       res.status(200).send({ success: stripeRes });
