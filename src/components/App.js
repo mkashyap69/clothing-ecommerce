@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import './styles/App.css';
 import { HomePage } from './HomePage';
 import ShopPage from './ShopPage';
@@ -11,16 +11,14 @@ import { selectCurrentUser } from '../redux/selectors/user';
 import { createStructuredSelector } from 'reselect';
 import { checkUserSession } from '../redux/action/user-action';
 
-class App extends React.Component {
-  unSubscribeFromAuth = null;
+const App=({ checkUserSession ,currentUser})=>  {
 
-  componentDidMount() {
-    const { checkUserSession } = this.props;
-    checkUserSession();
-  }
+  useEffect(() => {
+    checkUserSession()
+  }, [checkUserSession]);
 
   
-  render() {
+
     return (
       <div>
         <Header />
@@ -32,7 +30,7 @@ class App extends React.Component {
             path="/sign-in"
             render={() =>
               //render is a type of component renderer inside which we can write javascript code
-              this.props.currentUser ? (
+              currentUser ? (
                 <Redirect to="/" />
               ) : (
                 <SignInAndSignUpPage />
@@ -43,7 +41,6 @@ class App extends React.Component {
       </div>
     );
   }
-}
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
